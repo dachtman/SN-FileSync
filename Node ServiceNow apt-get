@@ -1,0 +1,95 @@
+Node ServiceNow apt-get
+	- install : Done
+		EX: app_get install /Users/user_name/WorkCode/
+
+	- create : Done
+		EX: app_get create FolderName https://instancename.service-now.com username password JSON
+
+	- setup-folders :done
+		EX: app_get setup-folders InstanceName
+
+	- sync-files : done
+		EX: app_get sync-files FolderName(optional) TableName(optional)
+
+	- inspect
+	- watch : done
+	- add-table : Done
+		EX: app_get add-table tableFolderName system_table_name dictionary_field display_value filetype
+		
+	- test-connection : Done
+		EX: app_get test-connection instanceName(optional)
+
+install
+	- arguments/prompt
+		* root directory
+	- base config file setup the directory where everything will be stored
+
+create
+	- arguments
+		* Name
+		* instance url
+		* username
+		* password
+		* JSON version
+	- Will create the entry for the specific instance and grab all the files for that instance
+
+add table / modify
+	- arguments
+		* Name
+		* Table name
+		* field
+		* key [optional]
+		* file type [optional]
+	- key defaults to name,
+	- file type defaults to js
+
+test connection
+	- arguments
+		* instance name [optional]
+	- test connection to instance
+
+update
+	- arguments
+		* table [optional]
+		* Instance Name [optional]
+		* FileName [optional]
+	- if no arguments will sync all files with what is stored on the instance
+	- else will sync with the specific instance
+
+inspect
+	- arguments
+		* Instance Name
+		* Table Name [optional]
+		* Record Name [optional]
+	- if no table checks all table for that specific instance
+	- else will check for differences between server and files
+	- prompt user to overwrite file
+
+watch (if nothing else called)
+	- normal action to run and sync enviroments
+
+
+app.config.json structure
+{
+	root:"",
+	instance:{
+		name:{
+			url:"",
+			user:"",
+			pass:"",
+			JSON:""
+		},
+	}
+	folder:{
+		name:{
+			table:"",
+			key:"",
+			fields:{
+				file_type:field,
+			}
+		}
+	}
+}
+
+Store last updated time in config file : Done
+Create JSON file for settings : done
