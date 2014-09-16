@@ -1,27 +1,19 @@
 {
-	"name" : "SN-FileSync",
-	"version" : "1.0.0",
-	"description" : "A file syncing tool for ServiceNow Developers",
-	"Author" : "Darrin Achtman <dachtman@gmail.com>",
-	"contributors" : [{
-		"name" : "John Caruso"
-	},{
-		"name" : "Sal Costa"
-	},{
-		"name" : "John Lamberta"
-	}],
-	"keywords":[
-		"ServiceNow",
-		"FileSync",
-		"SN"
-	],
-	"dependencies":{
-		"graceful-fs":"3.0.2",
-		"graceful-chokidar":"0.1.0",
-		"restify":"2.8.2",
-		"moment":"2.8.3",
-		"async":"0.9.0",
-		"diff":"1.0.8",
-		"colors":"0.6.2"
-	}
+  "name": "SN-FileSync",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app_get.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dachtman/SN-FileSync.git"
+  },
+  "author": "Darrin Achtman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dachtman/SN-FileSync/issues"
+  },
+  "homepage": "https://github.com/dachtman/SN-FileSync"
 }
