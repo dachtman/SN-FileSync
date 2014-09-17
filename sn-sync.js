@@ -1,6 +1,6 @@
 //READING WRITING TO SN
 // Requires
-var config = require("./config");
+//var config = require("./config");
 
 privateFunction = function(){
 	return config.root;
