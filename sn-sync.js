@@ -1,11 +1,34 @@
 //READING WRITING TO SN
 // Requires
-//var config = require("./config");
+var config = require("./config");
+var restify = require("restify");
 
-privateFunction = function(){
-	return config.root;
+var configData = config.retrieveConfig();
+
+function getInstance(instanceName){
+	if(instanceName){
+		if(configData.instances[instanceName]){
+			return configData.instances[instanceName]
+		}	
+	} else {
+		return configData.instances;
+	}
 }
 
-exports.public_function = function(){
-	return privateFunction()
+function getTable(tableName){
+	if(tableName){
+		if(configData.tables[tableName]){
+			return configData.tables[tableName]
+		}	
+	} else {
+		return configData.tables;
+	}	
 }
+
+exports.retrieveInstances = function(instanceName){
+	return getInstance(instanceName);
+};
+
+exports.retrieveTable = function(tableName){
+	return getTable(tableName);
+};

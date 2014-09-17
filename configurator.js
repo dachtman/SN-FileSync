@@ -13,7 +13,7 @@ function readConfig (){
 }
 
 function saveConfig (data){
-	return fs.writeFileSync(CONFIG_FILE, data);
+	fs.writeFileSync(CONFIG_FILE, data);
 }
 
 function updateConfig( key, value ){
@@ -51,6 +51,8 @@ exports.updateInstanceOrTable = function (folderName, key, value){
 	var currentConfig = JSON.parse( readConfig() );
 	currentConfig[folderName][key] = value;
 	saveConfig( JSON.stringify( currentConfig ) );
+
+	return currentConfig;
 };
 
 exports.upsertRoot = function( rootDirectory ){
@@ -58,9 +60,9 @@ exports.upsertRoot = function( rootDirectory ){
 };
 
 exports.retrieveConfig = function(){
-	JSON.parse( readConfig() );
+	return JSON.parse( readConfig() );
 };
 
-export.storeConfig = function(data){
+exports.storeConfig = function(data){
 	saveConfig( JSON.stringify( data ) );
 }
