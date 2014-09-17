@@ -1,8 +1,9 @@
+//READING WRITING TO SN
 // Requires
 var config = require("./config");
 
 privateFunction = function(){
-	return config.some_key;
+	return config.root;
 }
 
 exports.public_function = function(){
