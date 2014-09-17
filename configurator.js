@@ -16,10 +16,51 @@ function saveConfig (data){
 	return fs.writeFileSync(CONFIG_FILE, data);
 }
 
-exports.updateConfig = function ( key, value ){
+function updateConfig( key, value ){
 	var currentConfig = JSON.parse( readConfig() );
 	currentConfig[key] = value;
 	saveConfig( JSON.stringify( currentConfig ) );
+	return currentConfig;
+}
 
-	return "File Updated";
+exports.createTable = function( folderName, tableName, key, fields ){
+	return updateConfig(
+		folderName,
+		{
+			"table":tableName,
+			"key":key || "name",
+			"fields":fields || {"js":"script"}
+		}
+	);
+};
+
+exports.createInstance = function( folderName, instanceName, auth, jsonVer, readOnly ){
+	return updateConfig(
+		folderName,
+		{
+			"host":"https://" + instanceName + "service-now.com",
+			"auth":auth,
+			"last_synced":"1969-12-31 23:59:59",
+			"JSON":jsonVer || "JSON",
+			"read_only":readOnly || "false"
+		}
+	);
+};
+
+exports.updateInstanceOrTable = function (folderName, key, value){
+	var currentConfig = JSON.parse( readConfig() );
+	currentConfig[folderName][key] = value;
+	saveConfig( JSON.stringify( currentConfig ) );
+};
+
+exports.upsertRoot = function( rootDirectory ){
+	return updateConfig( "root", rootDirectory );
+};
+
+exports.retrieveConfig = function(){
+	JSON.parse( readConfig() );
+};
+
+export.storeConfig = function(data){
+	saveConfig( JSON.stringify( data ) );
 }
