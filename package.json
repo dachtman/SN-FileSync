@@ -2,7 +2,7 @@
   "name": "SN-FileSync",
   "version": "0.0.0",
   "description": "",
-  "main": "app_get.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,11 +18,16 @@
   "homepage": "https://github.com/dachtman/SN-FileSync",
   "dependencies": {
     "graceful-fs": "^3.0.2",
-    "graceful-chokidar": "^0.1.0",
     "restify": "^2.8.2",
     "async": "^0.9.0",
     "moment": "^2.8.3",
     "diff": "^1.0.8",
-    "colors": "^0.6.2"
+    "colors": "^0.6.2",
+    "chokidar": "^0.8.4"
+  },
+  "devDependencies": {
+    "nodewebkit": "^0.10.4",
+    "grunt-cli": "^0.1.13",
+    "grunt": "^0.4.5"
   }
 }
