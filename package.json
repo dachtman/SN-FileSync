@@ -2,9 +2,9 @@
   "name": "SN-FileSync",
   "version": "0.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./lib/app.js",
   "scripts": {
-    "start":"app",
+    "start":"node ./lib/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
