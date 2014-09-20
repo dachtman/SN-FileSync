@@ -35,6 +35,8 @@ function updateConfig( parentName, key, value ){
 	var currentConfig = JSON.parse( readConfig() );
 	currentConfig[parentName][key] = value;
 	saveConfig( JSON.stringify( currentConfig ) );
+	sync_logger.logTitle( "Config File Updated" );
+	sync_logger.logSuccess( parentName + "." + key );
 	return currentConfig;
 }
 
