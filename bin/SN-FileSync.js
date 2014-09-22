@@ -1,7 +1,7 @@
-var monitor = require("./monitor");
-var sn_sync = require("./sn-sync");
-var config = require("./configurator");
-var sync_logger = require("./sync-logger");
+var monitor = require("../lib/monitor");
+var sn_sync = require("../lib/sn-sync");
+var config = require("../lib/configurator");
+var sync_logger = require("../lib/sync-logger");
 var readline = require('readline');
 var CONFIG_OBJECT = config.retrieveConfig();
 var PROMPTDATA = [];
@@ -132,15 +132,17 @@ var CLIObject = {
 	},
 	watch: function(){
 		FILEMONITOR = new monitor();
-		showPrompt(true);
+		showPrompt(true,"Enter Stop to stop watching: ");
 	},
 	stop:function(){
 		FILEMONITOR.closeMonitor();
+		showPrompt(true);
 	},
 	exit: function(){
 		rl.close();
 	}
 }
+
 function createFieldUpdate( folderName, fieldName, extension){
 	var fields = CONFIG_OBJECT.tables[ folderName ].fields;
 	fields[ fieldName ] = extension;

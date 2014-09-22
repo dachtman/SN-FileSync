@@ -2,11 +2,12 @@
   "name": "SN-FileSync",
   "version": "0.0.0",
   "description": "",
-  "main": "./lib/app.js",
   "scripts": {
-    "start":"node ./lib/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin":{
+    "SN-FileSync":"./bin/SN-FileSync.js"
+  }
   "repository": {
     "type": "git",
     "url": "https://github.com/dachtman/SN-FileSync.git"
