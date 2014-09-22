@@ -3,6 +3,7 @@ var sn_sync = require("../lib/sn-sync");
 var config = require("../lib/configurator");
 var sync_logger = require("../lib/sync-logger");
 var readline = require('readline');
+var async = require("async");
 var CONFIG_OBJECT = config.retrieveConfig();
 var PROMPTDATA = [];
 var DEFAULTPROMPT = "What action would you like to perform? ";
@@ -56,7 +57,7 @@ var CLIObject = {
 	"update-instance": function( promptLength ){
 		configureNextPrompt({
 				"Folder Name":Object.keys( getInstance() ).sort(),
-				"Key to Update":"host JSON read_only username password last_synced".split(" ").sort(),
+				"Key to Update":"host json read_only username password last_synced".split(" ").sort(),
 				"New Value":[]
 			},
 			promptLength,
@@ -130,6 +131,16 @@ var CLIObject = {
 			config.removeField
 		);
 	},
+	"sync-files":function(promptLength){
+		configureNextPrompt({
+				"Instance Name":Object.keys( getInstance() ).sort(),
+				"Table Name":Object.keys( getTable() ).sort(),
+				"Specific Query":[]
+			},
+			promptLength,
+			sn_sync.getRecords
+		);
+	},
 	watch: function(){
 		FILEMONITOR = new monitor();
 		showPrompt(true,"Enter Stop to stop watching: \n");
@@ -144,9 +155,17 @@ var CLIObject = {
 }
 
 function createFieldUpdate( folderName, fieldName, extension){
-	var fields = CONFIG_OBJECT.tables[ folderName ].fields;
-	fields[ fieldName ] = extension;
-	return config.updateTableFolder(folderName,"fields",fields);
+	try{
+		var fields = CONFIG_OBJECT.tables[ folderName ].fields;
+		fields[ fieldName ] = extension;
+		config.updateTableFolder(folderName,"fields",fields);
+	}
+	catch(err){
+		sync_logger.logFailure("One or more selections was not a valid option");
+		sync_logger.logFailure("Folder Name: " + folderName);
+		sync_logger.logFailure("Field Name: " + fieldName);
+		sync_logger.logFailure("Extension: " + extension);
+	}
 }
 
 function configureNextPrompt( promptObject, promptLength, callback ){
@@ -154,8 +173,9 @@ function configureNextPrompt( promptObject, promptLength, callback ){
 	var promptPhrase = promptArray[ promptLength ];
 	if( promptLength == promptArray.length ){
 		PROMPTDATA.shift();
-		CONFIG_OBJECT = callback.apply( this, PROMPTDATA);
-		showPrompt( true )
+		callback.apply( this, PROMPTDATA);
+		CONFIG_OBJECT = config.retrieveConfig();
+		showPrompt( true );
 	} else {
 		showPrompt(
 			false,
@@ -170,7 +190,9 @@ function interpretCLI( action ){
 	if ( PROMPTDATA[ 0 ] ) {
 		promptSelection = PROMPTDATA[ 0 ];
 	}
-	PROMPTDATA.push( action );
+	if(action != ""){
+		PROMPTDATA.push( action );
+	}
 	if( !CLIObject[ promptSelection ] ){
 		return showPrompt( true );
 	}

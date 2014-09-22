@@ -32,5 +32,6 @@
     "nodewebkit": "^0.10.4",
     "grunt-cli": "^0.1.13",
     "grunt": "^0.4.5"
-  }
+  },
+  "private": true
 }
