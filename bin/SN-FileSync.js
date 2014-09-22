@@ -132,7 +132,7 @@ var CLIObject = {
 	},
 	watch: function(){
 		FILEMONITOR = new monitor();
-		showPrompt(true,"Enter Stop to stop watching: ");
+		showPrompt(true,"Enter Stop to stop watching: \n");
 	},
 	stop:function(){
 		FILEMONITOR.closeMonitor();
