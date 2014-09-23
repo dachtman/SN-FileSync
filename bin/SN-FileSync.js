@@ -35,6 +35,7 @@ function showPrompt( resetPromptData, promptMessage, newCompletions ) {
 	COMPLETIONS = newCompletions || Object.keys( CLIObject ).sort();
 	if( resetPromptData ){
 		PROMPTDATA = [];
+		CONFIG_OBJECT = config.retrieveConfig();
 	}
 	rl.setPrompt( promptMessage );
 	rl.prompt();
