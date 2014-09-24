@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",,
+    "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall":"./lib/setup-default-config.js"
   },
   "bin":{
     "SN-FileSync":"./bin/SN-FileSync.js"
-  }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/dachtman/SN-FileSync.git"
